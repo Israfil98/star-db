@@ -12,8 +12,6 @@ class App extends Component {
     selectedItem: null,
   };
 
-  componentDidMount() {}
-
   onItemSelected = (id) => {
     console.log('item clicked', id);
     this.setState({
