@@ -7,19 +7,19 @@ import ErrorMessage from '../error-message/error-message';
 import Spinner from '../spinner/spinner';
 
 export default class RandomPlanet extends Component {
-  constructor() {
-    super();
-
-    this.updatePlanet();
-  }
-
-  swapiService = new SwapiService();
-
   state = {
     planet: {},
     loading: true,
     error: false,
   };
+
+  swapiService = new SwapiService();
+
+  componentDidMount() {
+    this.updatePlanet();
+
+    const interval = setInterval(this.updatePlanet, 5000);
+  }
 
   onPlanetLoaded = (planet) => {
     this.setState({ planet, loading: false });
@@ -29,14 +29,14 @@ export default class RandomPlanet extends Component {
     this.setState({ error: true, loading: false });
   };
 
-  updatePlanet() {
-    const id = 15;
+  updatePlanet = () => {
+    const id = Math.floor(Math.random() * 25 + 2);
 
     this.swapiService
       .getPlanet(id)
       .then(this.onPlanetLoaded)
       .catch(this.onError);
-  }
+  };
 
   render() {
     const { planet, loading, error } = this.state;
