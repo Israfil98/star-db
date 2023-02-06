@@ -9,7 +9,7 @@ import RandomPlanet from '../random-planet/random-planet';
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Header />
       <RandomPlanet />
 
